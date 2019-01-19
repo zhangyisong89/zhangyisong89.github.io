@@ -147,6 +147,102 @@
                 <aside id="sidebar">
    
         
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>分类</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            版本管理
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Git
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/版本管理/Git/本地仓库与远程仓库/">本地仓库与远程仓库</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/个人博客网站/">个人博客网站初衷</a></li>  <li class="file"><a href="/wiki/博客网站工具-Hexo/">Hello World</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
     
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
@@ -164,7 +260,7 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2019/01/20/个人博客网站/">
+        <a href="/wiki/个人博客网站/">
             <time datetime="2019-01-19T16:17:59.000Z" itemprop="datePublished">2019-01-19</time>
         </a>
     </div>
@@ -176,13 +272,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href="https://github.com/zys15280427883@163.com/zhangyisong89.github.io/raw/master/source/_posts/个人博客网站.md"> Source </a>
+                                <a href="https://github.com/zys15280427883@163.com/zhangyisong89.github.io/raw/master/source/_posts/个人博客网站.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href="https://github.com/zys15280427883@163.com/zhangyisong89.github.io/edit/master/source/_posts/个人博客网站.md"> Edit </a>
+                                <a href="https://github.com/zys15280427883@163.com/zhangyisong89.github.io/edit/master/source/_posts/个人博客网站.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href="https://github.com/zys15280427883@163.com/zhangyisong89.github.io/commits/master/source/_posts/个人博客网站.md"> History </a>
+                                <a href="https://github.com/zys15280427883@163.com/zhangyisong89.github.io/commits/master/source/_posts/个人博客网站.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
                             </div>
                         
                     </div>
@@ -190,7 +286,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/2019/01/20/个人博客网站/">个人博客网站初衷</a>
+            <a class="article-title" href="/wiki/个人博客网站/">个人博客网站初衷</a>
         </h1>
     
 
@@ -232,7 +328,7 @@
         
             </p></div>   
             <div class="article-more-link">
-                <a href="/2019/01/20/个人博客网站/#more">查看更多</a>
+                <a href="/wiki/个人博客网站/#more">查看更多</a>
             </div>
         
         <footer class="article-footer">
@@ -246,7 +342,7 @@
 
 
     
-        <article id="post-博客网站工具-Hexo" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <article id="post-版本管理/Git/本地仓库与远程仓库" class="article article-type-post" itemscope="" itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -254,12 +350,17 @@
                 
                     <div class="article-meta">
                         
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/版本管理/">版本管理</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/版本管理/Git/">Git</a>
+    </div>
+
                         
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2019/01/19/博客网站工具-Hexo/">
-            <time datetime="2019-01-19T08:00:49.528Z" itemprop="datePublished">2019-01-19</time>
+        <a href="/wiki/版本管理/Git/本地仓库与远程仓库/">
+            <time datetime="2019-01-19T16:17:59.000Z" itemprop="datePublished">2019-01-19</time>
         </a>
     </div>
 
@@ -270,13 +371,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href="https://github.com/zys15280427883@163.com/zhangyisong89.github.io/raw/master/source/_posts/博客网站工具-Hexo.md"> Source </a>
+                                <a href="https://github.com/zys15280427883@163.com/zhangyisong89.github.io/raw/master/source/_posts/版本管理/Git/本地仓库与远程仓库.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href="https://github.com/zys15280427883@163.com/zhangyisong89.github.io/edit/master/source/_posts/博客网站工具-Hexo.md"> Edit </a>
+                                <a href="https://github.com/zys15280427883@163.com/zhangyisong89.github.io/edit/master/source/_posts/版本管理/Git/本地仓库与远程仓库.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href="https://github.com/zys15280427883@163.com/zhangyisong89.github.io/commits/master/source/_posts/博客网站工具-Hexo.md"> History </a>
+                                <a href="https://github.com/zys15280427883@163.com/zhangyisong89.github.io/commits/master/source/_posts/版本管理/Git/本地仓库与远程仓库.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
                             </div>
                         
                     </div>
@@ -284,7 +385,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/2019/01/19/博客网站工具-Hexo/">Hello World</a>
+            <a class="article-title" href="/wiki/版本管理/Git/本地仓库与远程仓库/">本地仓库与远程仓库</a>
         </h1>
     
 
@@ -314,11 +415,11 @@
                 
                 
                     
-                    <p></p><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+                    <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">参考链接</span><br><span class="line">git clone，push，pull，fetch命令详解。</span><br><span class="line">https://blog.csdn.net/u012575819/article/details/50553501</span><br></pre></td></tr></table></figure>
+</p><h2 id="Git本地与远程"><a href="#Git本地与远程" class="headerlink" title="Git本地与远程"></a>Git本地与远程</h2><h3 id="git-clone"><a href="#git-clone" class="headerlink" title="git clone"></a>git clone</h3><p>远程操作的第一步，通常是从远程主机克隆一个版本库，这时就要用到git clone命令。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone &lt;版本库的网址&gt;</span><br></pre></td></tr></table></figure></p>
+<p>该命令会在本地主机生成一个目录，与远程主机的版本库同名。如果要指定不同的目录名，可以将目录名作为git clone命令的第二个参数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone &lt;版本库的网址&gt; &lt;本地目录名&gt;</span><br></pre></td></tr></table></figure></p>
+<p>git clone支持多种协议，除了HTTP(s)以外，还支持SSH、Git、本地文件协议等，下面是一些例子。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git clone http[s]://example.com/path/to/repo.git/</span><br><span class="line">$ git clone ssh://example.com/path/to/repo.git/</span><br><span class="line">$ git clone git://example.com/path/to/repo.git/</span><br><span class="line">$ git clone /opt/git/project.git</span><br><span class="line">$ git clone file:///opt/git/project.git</span><br><span class="line">$ git clone ftp[s]://example.com/path/to/repo.git/</span><br><span class="line">$ git clone rsync://example.com/path/to/repo.git/</span><br></pre></td></tr></table></figure></p>
+<p>通常来说，Git协议下载速度最快，SSH协议用于需要用户认证的场合。各种协议优劣的详细讨论请参考官方文档。</p>
 <p>
                 
             
@@ -326,7 +427,101 @@
         
             </p></div>   
             <div class="article-more-link">
-                <a href="/2019/01/19/博客网站工具-Hexo/#more">查看更多</a>
+                <a href="/wiki/版本管理/Git/本地仓库与远程仓库/#more">查看更多</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-博客网站工具-Hexo" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/博客网站工具-Hexo/">
+            <time datetime="2019-01-19T08:00:49.528Z" itemprop="datePublished">2019-01-19</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href="https://github.com/zys15280427883@163.com/zhangyisong89.github.io/raw/master/source/_posts/博客网站工具-Hexo.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/zys15280427883@163.com/zhangyisong89.github.io/edit/master/source/_posts/博客网站工具-Hexo.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/zys15280427883@163.com/zhangyisong89.github.io/commits/master/source/_posts/博客网站工具-Hexo.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/博客网站工具-Hexo/">Hello World</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p></p><p>Welcome to <a href="https://hexo.io/" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" rel="external nofollow noopener noreferrer" target="_blank">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" rel="external nofollow noopener noreferrer" target="_blank">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" rel="external nofollow noopener noreferrer" target="_blank">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" rel="external nofollow noopener noreferrer" target="_blank">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" rel="external nofollow noopener noreferrer" target="_blank">Server</a></p>
+<p>
+                
+            
+        
+        
+            </p></div>   
+            <div class="article-more-link">
+                <a href="/wiki/博客网站工具-Hexo/#more">查看更多</a>
             </div>
         
         <footer class="article-footer">
@@ -346,8 +541,8 @@
     <div class="outer">
         <div id="footer-info" class="inner">
             zhangyisong &copy; 2019 
-            <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png"></a>
-            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            <a rel="external nofollow noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png"></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" rel="external nofollow noopener noreferrer" target="_blank">wikitten</a>
             
                 <br>
                 <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
@@ -404,4 +599,3 @@
 
     </div>
 </body>
-</html>
